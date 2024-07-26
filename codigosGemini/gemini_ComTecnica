@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <h1>Cadastro</h1>
+
+    <form action="#">
+        <label for="nome">Nome Completo:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" name="telefone" required>
+
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" required>
+
+        <label for="data">Data de Nascimento:</label>
+        <input type="date" id="data" name="data" required>
+
+        <label for="genero">Genero:</label>
+        <select id="genero" name="genero" required>
+            <option value="">Selecione</option>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+            <option value="outro">Outro</option>
+        </select>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>
+
+<style>
+/* Estilo geral do formulário */
+form {
+    width: 500px; /* Largura do formulário */
+    margin: 0 auto; /* Centraliza o formulário na página */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para labels e inputs */
+label,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select {
+    display: block; /* Exibe cada elemento em uma linha */
+    width: 100%; /* Ocupa a largura total do container */
+    margin-bottom: 15px; /* Espaçamento entre os elementos */
+    font-size: 16px; /* Tamanho da fonte */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Estilo específico para labels */
+label {
+    font-weight: bold; /* Texto em negrito */
+    margin-bottom: 5px; /* Espaçamento menor antes do input */
+}
+
+/* Estilo para inputs em foco (ativos) */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus {
+    outline: none; /* Remove a borda de foco padrão */
+    border: 1px solid #007bff; /* Borda azul ao focar */
+    box-shadow: 0 0 5px rgba(0, 79, 255, 0.2); /* Sombra azul ao focar */
+}
+
+/* Estilo do botão de submit */
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Efeito de hover */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Cor mais escura no hover */
+}
+</style>
+
+
+<script>
+// Função para criar a máscara
+function mascara(i, e) {
+    var v = i.value;
+    var t = i.maxLength;
+
+    // Máscara para telefone
+    if (i.id === 'telefone') {
+        // Permite digitar apenas números
+        v = v.replace(/\D/g, "");
+
+        // Formata o telefone
+        v = v.replace(/(\d{2})(\d)/, "$1($2");
+        v = v.replace(/(\d{5})(\d)/, "$1-$2");
+        v = v.replace(/(-\d{4})(\d)/, "$1$2");
+    }
+
+    // Máscara para CPF
+    if (i.id === 'cpf') {
+        // Permite digitar apenas números
+        v = v.replace(/\D/g, "");
+
+        // Formata o CPF
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d{2})/, "$1-$2");
+    }
+
+    i.value = v;
+    if (v.length >= t) {
+        i.value = v.substring(0, t);
+    }
+}
+</script>
